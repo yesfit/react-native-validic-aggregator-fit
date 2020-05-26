@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>react-native-validic-aggregator-fit</h1>
+<p>This project integrates Google Fit with the Validic Mobile Aggregator to passively collect data on behalf of an end user. Validic ensures that our Mobile SDK makes use of the minimal scopes needed for our supported data types. Additionally, Validic does not request or use any scopes indicated as sensitive or restricted by Google. Avoiding sensitive and restricted scopes ensures that you will not need to complete Google's sensitive scope verification or restricted scope verification and security assessment - both of which are time-consuming and costly.</p>
+<p>Be aware that Google has an extensive and potentially lengthy verification process. Google manages their own verification process and it is subject to change at any time at their discretion. It is your responsiblity to review, understand, and follow Google's verification process and provide Google with all information they request before sharing your application publicly. Validic does not provide direct support for Google's verification process, however, <a href="https://support.google.com/cloud/answer/9110914?hl=en">Google's Verification FAQ</a> is detailed and provides you with the information you'll need to complete the process. See the <a href="#customer-requirements">Customer Requirements</a> section below for highlights on setting up, developing, and verifying for Google Fit.</p>
+<h2>Customer Requirements</h2>
+<p>Google Fit is available for Inform (V2) Validic customers. If you are a Legacy customer and are interested in Google Fit, please reach out to your Validic Client Success Manager.</p>
+<p>Validic's Google Fit integration works with Google Fit for Android. Google Fit for Android uses Google's OAuth API for accessing user data. There is setup that must occur before you implement Google Fit into your mobile project so that your users can consent to sharing and share their data successfully:</p>
+<p>Before you start development, in <a href="https://console.developers.google.com">Google Api Console</a> you must:</p>
+<ul>
+<li><a href="https://developers.google.com/fit/android/get-api-key">Create Google Services OAuth 2.0 Client IDs</a></li>
+<li><a href="https://support.google.com/cloud/answer/9110914?hl=en#how-smooth">Verify your domain ownership</a></li>
+<li><a href="https://support.google.com/cloud/answer/6158849#userconsent">Configure your user consent screen</a></li>
+</ul>
+<p>After completing the above setup, you can start development using the instructions in this tutorial. While you are developing, testing can occur with Google user accounts that are registered to the same domain as the mobile project.</p>
+<p>After development and testing are complete and before you launch your app, you will need to submit a request to Google for Oauth API Verification. There are certain instances where this may not be required (see <a href="https://support.google.com/cloud/answer/9110914?hl=en#skip">Google's FAQ</a> for details).</p>
+<p>Once you submit your verification request, you may be required to provide some or all of the following:</p>
+<ul>
+<li>Application Homepage detailing your use of requested scopes</li>
+<li>Privacy Policy and Terms &amp; Conditions</li>
+<li>Application Demo Video showing the user consent workflow in your app</li>
+<li>Application Name, Logo, and/or other branding elements</li>
+</ul>
+<p>Google dictates their own verification process so you may be asked to provide additional information as well. See  <a href="https://support.google.com/cloud/answer/9110914?hl=en#verification-requirements">Veification Requirements</a> for more information. Be sure to respond to Google's requests as quickly as possible to minimize delays in getting your verification approved.</p>
+<h2>Getting started</h2>
+<p><code>$ npm install react-native-validic-aggregator-fit --save</code></p>
+<h3>Mostly automatic installation</h3>
+<p><code>$ react-native link react-native-validic-aggregator-fit</code></p>
+<h2>Usage</h2>
+<pre class="prettyprint source lang-javascript"><code>import ValidicAggregatorFit from 'react-native-validic-aggregator-fit';
+</code></pre>
+<h3>Initialization</h3>
+<p><code>ValidicAggregatorFit</code> will be initialized at app startup and will immediately start listening for
+previously subscribed data types. It is recommended that you set a listener on the <code>ValidicAggregatorFit</code> during your <code>componentDidMount()</code> method</p>
+<pre class="prettyprint source lang-javascript"><code>    componentDidMount() {
+        ValidicAggregatorFit.eventEmitter.addListener('validic:fit:onrecords',(summary)=>{
+            console.log(&quot;Proccessed Google Fit Data&quot;);
+            console.log(summary);
+        });
+        ValidicAggregatorFit.eventEmitter.addListener('validic:fit:onerror', (callback)=>{
+            console.warn(callback.error);
+        });
+</code></pre>
+<p>Make sure to unsubscribe from events during <code>componentWillUnmount()</code>.</p>
+<pre class="prettyprint source lang-javascript"><code>    componentWillUnmount() {
+        ValidicAggregatorFit.eventEmitter.removeAllListeners('validic:fit:onrecords');
+        ValidicAggregatorFit.eventEmitter.removeAllListeners('validic:fit:onerror');
+</code></pre>
+<h3>Requesting Permissions</h3>
+<p>Before collecting any data from Google Fit, a Google Account must be associated with the <code>ValidicAggregatorFit</code>, and the end user must authorize the app to collect data on their behalf.</p>
+<h4>Previously granted permissions</h4>
+<p>To check if permissions have already been granted the <code>hasDataAccess(dataTypes)</code> method can be used</p>
+<pre class="prettyprint source lang-javascript"><code>    let permissions = await ValidicAggregatorFit.requestPermissions([ValidicAggregatorFit.DataTypeStepCount])
+    if(permissions[ValidicAggregatorFit.DataTypeStepCount] == true){
+        //subscribe
+    }
+</code></pre>
+<p>The promise returned from <code>hasDataAccess(dataTypes)</code> associates a <code>DataType</code> with true, if a valid Google account exists and permission has previsouly been granted, or false otherwise.</p>
+<h4>Requesting new permissions</h4>
+<p>To request permission from the end user to authorize data collection the <code>requestPermissions(dataType)</code> function can be used to authorize your application</p>
+<pre class="prettyprint source lang-javascript"><code> let permissions = await ValidicAggregatorFit.requestPermissions([ValidicAggregatorFit.DataTypeStepCount])
+ if(permissions[ValidicAggregatorFit.DataTypeStepCount] == true){
+     //subscribe
+ }
+
+</code></pre>
+<h3>Subscriptions</h3>
+<p>After Permissions have been granted for a <code>DataType</code> the <code>ValidicAggregatorFit</code> can be used to add subscriptions to data change events from Google Fit.
+Data will automatically will queued for submission to the Validic API when internet is available on the device</p>
+<pre class="prettyprint source lang-javascript"><code>    ValidicAggregatorFit.subscribe([ValidicAggregatorFit.DataTypeStepCount]);
+</code></pre>
+<p>To unregister from receiving data update events use the <code>ValidicAggregatorFit</code> to unsubscribe</p>
+<pre class="prettyprint source lang-javascript"><code>    ValidicAggregatorFit.unsubscribe(ValidicAggregatorFit.DataTypeStepCount);
+</code></pre>
+<p>Get a list of currently subscribed <code>DataType</code>s</p>
+<pre class="prettyprint source lang-javascript"><code>    let subscriptions = await ValidicAggregatorFit.currentSubscriptions()
+</code></pre>
+<h4>Currently Supported DataTypes</h4>
+<p>Available datatypes can be referenced from the <code>ValidicAggregatorFit</code>.<em>datatype</em></p>
+<ul>
+<li>DataTypeStepCount</li>
+<li>DataTypeWeight</li>
+<li>DataTypeHeartRate</li>
+<li>DataTypeCaloriesExpended</li>
+<li>DataTypeMoveMinutes</li>
+<li>DataTypeDistance</li>
+<li>DataTypeNutrition</li>
+</ul>
+<p>Records collected are automatically submitted to the Validic Inform API and a summary of records processed will be sent as an event named <code>validic:fit:onrecords</code>.</p>
+<p>For an example of setting a listener see <a href="#initialization">Initialization</a></p>
+<h3>Logout</h3>
+<p>To remove all subscriptions and log an end user out simply call</p>
+<pre class="prettyprint source lang-javascript"><code>    ValidicAggregatorFit.disconnect()
+</code></pre></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="ValidicAggregatorFit.html">ValidicAggregatorFit</a></li></ul><h3>Events</h3><ul><li><a href="ValidicAggregatorFit.html#.event:OnRecordSummary">OnRecordSummary</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Wed May 06 2020 20:39:28 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
