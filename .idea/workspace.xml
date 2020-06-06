@@ -13,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/react-native-validic-aggregator-shealth" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1cXQ6ME40gxPh0JdIdBIW5feR10" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -40,7 +40,7 @@
       <updated>1590672281965</updated>
       <workItem from="1590672284952" duration="13000" />
       <workItem from="1590672383128" duration="2536000" />
-      <workItem from="1591456222121" duration="2042000" />
+      <workItem from="1591456222121" duration="3764000" />
     </task>
     <servers />
   </component>
