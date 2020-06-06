@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11a875e9-a210-401a-aa70-94187acc8e3c" name="Default Changelist" comment="">
-      <change beforePath="$USER_HOME$/react-native-validic-aggregator-ios/RNValidicHealthkit.podspec" beforeDir="false" afterPath="$USER_HOME$/react-native-validic-aggregator-ios/RNValidicHealthkit.podspec" afterDir="false" />
-      <change beforePath="$USER_HOME$/react-native-validic-session/RNValidicSession.podspec" beforeDir="false" afterPath="$USER_HOME$/react-native-validic-session/RNValidicSession.podspec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$USER_HOME$/react-native-validic-aggregator-ios/package.json" beforeDir="false" afterPath="$USER_HOME$/react-native-validic-aggregator-ios/package.json" afterDir="false" />
+      <change beforePath="$USER_HOME$/react-native-validic-aggregator-shealth/package.json" beforeDir="false" afterPath="$USER_HOME$/react-native-validic-aggregator-shealth/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/react-native-validic-aggregator-ios" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/react-native-validic-aggregator-shealth" />
   </component>
   <component name="ProjectId" id="1cXQ6ME40gxPh0JdIdBIW5feR10" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -38,7 +40,7 @@
       <updated>1590672281965</updated>
       <workItem from="1590672284952" duration="13000" />
       <workItem from="1590672383128" duration="2536000" />
-      <workItem from="1591456222121" duration="1567000" />
+      <workItem from="1591456222121" duration="2042000" />
     </task>
     <servers />
   </component>
