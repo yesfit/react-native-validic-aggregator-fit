@@ -79,7 +79,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: 'aggregator*.aar')
     implementation files("$rootDir/../node_modules/react-native-validic-session/android/libs/validicmobile-shared-full-prod-release.aar")
 
-    implementation 'com.google.android.gms:play-services-fitness:18+'
+    implementation 'com.google.android.gms:play-services-fitness:20.0.0'
     implementation 'com.google.android.gms:play-services-auth:18+'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10"
 
